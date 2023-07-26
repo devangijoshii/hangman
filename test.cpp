@@ -12,17 +12,17 @@ using namespace std;
 using namespace std::chrono;
 
 // Themed word lists
-const vector<string> animals = {"elephant", "tiger", "giraffe", "panda", "dolphin", "kangaroo"};
-const vector<string> countries = {"japan", "brazil", "france", "india", "canada", "egypt"};
-const vector<string> movies = {"inception", "avatar", "titanic", "jurassic", "matrix", "frozen"};
-const vector<string> sports = {"football", "tennis", "basketball", "cricket", "swimming", "golf"};
+const vector<vector<string>> themes = {
+    {"elephant", "tiger", "giraffe", "panda", "dolphin", "kangaroo"}, // Animals
+    {"japan", "brazil", "france", "india", "canada", "egypt"},         // Countries
+    {"inception", "avatar", "titanic", "jurassic", "matrix", "frozen"}, // Movies
+    {"football", "tennis", "basketball", "cricket", "swimming", "golf"} // Sports
+};
 
 // Difficulty levels
 const int EASY = 0;
 const int MEDIUM = 1;
 const int HARD = 2;
-
-const vector<string> wordsByDifficulty[3] = {animals, countries, movies}; // Use movies for HARD difficulty
 
 const int TIME_LIMIT = 60;         // Time limit for Timed Mode in seconds
 const int HINTS_ALLOWED = 2;      // Number of hints allowed per game
@@ -179,7 +179,7 @@ int main() {
             return 0;
         }
 
-        vector<string> wordList = wordsByDifficulty[difficultyChoice];
+         vector<string> wordList = themes[themeChoice - 1]; // Subtract 1 since themeChoice starts from 1
 
         string word = getRandomWord(wordList);
         unordered_set<char> guessedLetters;
